@@ -17,7 +17,7 @@ export default function SignUp() {
         try {
             const response = await axios.post("/api/users/signup", user);
             console.log("resClient: ",response);
-            router.push('/login')
+            router.push('/verifyemail')
         } catch (error: any) {
             toast.error(error.message);
         }

@@ -2,6 +2,7 @@ import { connect } from "@/dbconfig/config";
 import User from "@/models/usermodel"
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
+import { createmail } from "@/helpers/mailer";
 
 
 connect();
@@ -24,13 +25,15 @@ export async function POST(request: NextRequest) {
             password: hashedPassword,
         })
         console.log(newUser);
+        const emailSender = await createmail({ email, emailType: "VERIFY", userId: newUser._id })
+
         return NextResponse.json({ msg: newUser }, {
             status: 200
         })
         // if the response was not sent it will give the 500 status error
 
     } catch (error) {
-        return NextResponse.json({ error}, {
+        return NextResponse.json({ error }, {
             status: 400
         })
     }
