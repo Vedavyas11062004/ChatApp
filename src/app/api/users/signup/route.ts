@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
             password: hashedPassword,
         })
         console.log(newUser);
-        const emailSender = await createmail({ email, emailType: "VERIFY", userId: newUser._id })
+        
+        await createmail({ email, emailType: "VERIFY", userId: newUser._id })
 
         return NextResponse.json({ msg: newUser }, {
             status: 200

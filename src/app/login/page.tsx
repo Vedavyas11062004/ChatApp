@@ -16,7 +16,6 @@ export default function Login() {
         try {
             const response = await axios.post("/api/users/login", user);
             console.log("resClient: ",response);
-            toast.success("login success");
             router.push('/chatroom')
         } catch (error: any) {
             toast.error(error.message);
