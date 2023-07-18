@@ -29,8 +29,7 @@ export async function createmail({ email, emailType, userId }: any) {
             from: "csc06498@gmail.com", // sender address
             to: email,
             subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password", // Subject line
-            text: "Hello world?", // plain text body
-            html: `<p>Click <a href="${process.env.domain}/verifyemail?token=${hashedToken}">here</a> to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
+            html: `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
             or copy and paste the link below in your browser. <br> ${process.env.domain}/verifyemail?token=${hashedToken}
             </p>`
         });
