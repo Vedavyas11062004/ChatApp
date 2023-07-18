@@ -13,16 +13,20 @@ export async function createmail({ email, emailType, userId }: any) {
             await User.findByIdAndUpdate(userId,
                 { forgotPasswordToken: hashedToken, forgotPasswordTokenExpiry: Date.now() + 3600000 })
         }
+        console.log(process.env.email);
+        console.log(process.env.password);
+        
         var transport = nodemailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+            // host: "sandbox.smtp.mailtrap.io",
+            // port: 2525,
+            service:'gmail',
             auth: {
-                user: "e2d2e2333028dc",
-                pass: "138f0548935676"
+                user: "csc06498@gmail.com",
+                pass: "sizguumraoldgwsw",
             }
         });
         const info = await transport.sendMail({
-            from: 'vedavyas@gmail.com', // sender address
+            from: "csc06498@gmail.com", // sender address
             to: email,
             subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password", // Subject line
             text: "Hello world?", // plain text body
